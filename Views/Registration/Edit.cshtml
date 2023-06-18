@@ -1,0 +1,73 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model RegistrationProject.Models.RegistTable
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+<h2>Edit Registration</h2>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" style="width:215.66px" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <br/>
+
+    <div class="form-group">
+        <label asp-for="EmailId"></label>
+        <input asp-for="EmailId" class="form-control" style="width:215.66px" />
+        <span asp-validation-for="EmailId" class="text-danger"></span>
+    </div>
+    <br/>
+
+    <div class="form-group">
+        <label asp-for="Gender"></label>
+        <select asp-for="Gender" class="form-control" asp-items="ViewBag.Gender" style="width:215.66px">
+            <option value="">Select gender</option>
+              
+            
+         </select>
+         <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+    <br/>
+
+    <div class="form-group">
+        <label asp-for="MobileNumber"></label>
+        <input asp-for="MobileNumber" class="form-control" style="width:215.66px"/>
+        <span asp-validation-for="MobileNumber" class="text-danger"></span>
+    </div>
+    <br/>
+
+    <div class="form-group">
+        <label asp-for="Country">Country</label>
+        
+        <div>
+            
+        @foreach(var country in new List<string> { "India", "America", "Australia", "China" })
+        {
+            <input type="checkbox" name="Country" value="@country" id="@country" @(Model.Country.Contains(@country) ? "checked" : "")/>@country
+            <br/>
+        }
+            <span asp-validation-for="Country" class="text-danger"></span>
+            
+            </div>
+    
+    </div>
+    <br/>
+
+    <div class="form-group">
+        <label asp-for="ProfileImage"></label>
+        <input type="file" asp-for="ProfileImage" class="form-control-file" />
+        
+        @if (Model.ProfileImage != null)
+        {
+            <img src="@Url.Content(Model.ProfileImage)" width="50" height="50" />
+        }
+        <span asp-validation-for="ProfileImage" class="text-danger"></span>
+    </div>
+    <br/>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
